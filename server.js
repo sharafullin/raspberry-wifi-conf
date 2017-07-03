@@ -1,3 +1,10 @@
+var access = fs.createWriteStream(dir + '/node.access.log', { flags: 'a' })
+      , error = fs.createWriteStream(dir + '/node.error.log', { flags: 'a' });
+
+// redirect stdout / stderr
+proc.stdout.pipe(access);
+proc.stderr.pipe(error);
+
 var async               = require("async"),
     wifi_manager        = require("./app/wifi_manager")(),
     dependency_manager  = require("./app/dependency_manager")(),
